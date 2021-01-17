@@ -316,7 +316,7 @@ def indexx(name):
         post_end_point = request.form.get('ending_point')
         j_date = post_date + "-" + post_month
         if post_start_point == "Banglore" and post_end_point == "Delhi" or post_start_point == "Delhi" and post_end_point == "Banglore":
-            print("sex")
+
             cur = mysql.connection.cursor()
             sql = "SELECT * FROM enq WHERE name='BLR<-->DEL(EXPRESS)'"
             cur.execute(sql)
