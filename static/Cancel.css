@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.container{
+    min-width: 1000px;
+}
+.main_pro{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.contamin{
+
+   
+    height: 100%;
+    text-align: left;
+}
+.mainVV{
+    display: flex;
+    flex-direction: column;
+}
+.forms_control{
+    min-width: 1000px;
+    text-align: center;
+    font-size: 20px;
+        font-family: 'Poppins', sans-serif;
+        outline: none;
+}
+form{
+    outline: none;
+}
+
+.header>button{
+    height: 70px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color:  #3498db;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+.header>h6{
+    height: 70px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color:  #3498db;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+#confirm:hover{
+    transition: all 200ms ease-in-out;
+    transform: scale(1.02);
+
+    background-color: #f1c40f;
+        text-decoration: none;
+
+}
+a{
+    text-decoration: none;
+
+    border: none;
+    
+}
+.button_proceed{
+    border: none;
+    outline: none;
+    color: white;
+    padding:10px;
+    background-color: #3498db;
+}
+.button_proceed:hover{
+    background-color: #f1c40f;
+    text-shadow: 0.5px 0.5px 2px black;
+    transition: all 200ms ease-in-out;
+}
+textarea{
+    min-height: 300px;
+    min-width: 800px;
+    outline: none;
+}

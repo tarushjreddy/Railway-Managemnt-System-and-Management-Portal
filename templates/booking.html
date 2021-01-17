@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/Main.css" />
+    <link rel="stylesheet" href="../static/booking.css" />
+  </head>
+  <body>
+    <div class="nav_bar">
+      Railway Ticket Reservation System Portal ({{ value }})
+    </div>
+    <div class="container">
+     <form class="forms_control" action="/home" method="POST">
+        <div class="boxes" id="one">Ticket Booking</div>
+        <div class="form-group">
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Starting Point</label>
+            <select name="starting_point"  class="form-control" id="exampleFormControlSelect1">
+              <option>Banglore</option>
+              <option>Delhi</option>
+              <option>Kolkata</option>
+              <option>Mumbai</option>
+              <option>Banglore</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Ending Point</label>
+            <select name="ending_point" class="form-control" id="exampleFormControlSelect1">
+              <option>Banglore</option>
+              <option>Delhi</option>
+              <option>Kolkata</option>
+              <option>Mumbai</option>
+              <option>Banglore</option>
+            </select>
+          </div>
+            <div class="form-group">
+            <label for="exampleFormControlInput1"
+              >Number of Ticket Booked</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              value = {{value}}
+             readonly
+              name="booked"
+              id="exampleFormControlInput1"
+              placeholder="Only Number is allowed"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1"
+              >Enter the date of travel</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="date_val"
+              id="exampleFormControlInput1"
+              placeholder="Only Number is allowed"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1"
+              >Enter the month of travel</label
+            >
+            <input
+              type="number"
+              class="form-control"
+                 name="month_val"
+              id="exampleFormControlInput1"
+              placeholder="Only Number is allowed"
+            />
+          </div>
+          <div class="header">
+            <h6>Passenger Details ({{value}})</h6>
+            {% for i in range(0, value) %}
+            <div>
+            
+                <div class="form-group">
+                  <label for="exampleFormControlInput1"
+                    >Enter Passenger {{i+1}} name</label
+                  >
+                  <input
+                    type="text"
+                    name="name_{{i}}"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="Only Number is allowed"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1"
+                    >Enter Passenger {{i+1}} age</label
+                  >
+                  <input
+                    type="text"
+                    name="age_{{i}}"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="Only Number is allowed"
+                  />
+                </div>
+             
+            </div>
+            {%endfor%}
+               <a href="/home">
+                  <button class="button_proceed" type="submit">
+                    Submit and Proceed
+                  </button>
+                </a>
+              </form>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="../static/index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

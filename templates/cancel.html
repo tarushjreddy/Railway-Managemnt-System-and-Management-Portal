@@ -1,0 +1,126 @@
+<!-- <form class="forms_control" method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Enter the number of Tickets</label>
+
+    <input
+      type="number"
+      class="form-control"
+      id="exampleFormControlInput1"
+      placeholder="Only Number is allowed"
+    />
+  </div>
+</form> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/Main.css" />
+    <link rel="stylesheet" href="../static/Cancel.css" />
+  </head>
+  <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+  <body>
+    <div class="nav_bar">
+      Railway Ticket Reservation System Portal (Ticket Booking)
+    </div>
+    <div class="container">
+      <form class="forms_control" action="/Cancel" method='POST'>
+        <div class="boxes" id="two">Ticket Booking</div>
+        <div>Ticket Details
+
+        
+          
+        </div>
+        <table style="width:100%">
+  <tr>
+    <th>id</th>
+    <th>Name</th> 
+    <th>Age</th>
+    <th>Starting Point</th>
+    <th>Ending Point</th> 
+    <th>Phone</th>
+    <th>UserId</th>
+    <th>J-date</th> 
+    
+  </tr>
+
+   {% for result in res%}
+    
+            <tr>
+    <td>{{ result[0] }}</td>
+    <td>{{ result[1] }}</td>
+    <td>{{ result[2] }}</td>
+    <td>{{ result[3] }}</td>
+    <td>{{ result[4] }}</td>
+    <td>{{ result[5] }}</td>
+        <td>{{ result[6] }}</td>
+            <td>{{ result[8] }}-2020</td>
+
+    
+  </tr>
+          {%endfor%}
+</table>
+         <div class="form-group">
+              <label for="exampleFormControlInput1">Enter Number of Ticket</label>
+              <input
+                type="text"
+                name="numberofticekts"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Only Number is allowed"
+              />
+            </div>
+                  <div class="form-group">
+              <label for="exampleFormControlInput1">Enter the ID of Ticket</label>
+              <input
+                type="text"
+                name="idoftickets"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Only Number is allowed"
+              />
+            </div>
+                <a href="/Cancel">
+          <div class="header">
+      
+            <button type="submit" id="confirm">Cancel Ticket</button>
+         
+          
+          </div>
+             </a>
+        </div>
+      </form>
+    </div>
+    <script src="../static/index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

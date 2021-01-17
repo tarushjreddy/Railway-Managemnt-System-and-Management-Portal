@@ -1,0 +1,74 @@
+body{
+background-color: #74b9ff;
+color: white;
+}
+.main{
+   margin-top: 17%;
+
+   margin-left: 30px;
+   font-size: 30px;
+   display: flex;
+   max-width: 500px;
+   flex-direction: column;
+}
+input{
+    outline: none;
+        width: 450px;
+    border: none;
+    margin: 10px;
+    border-radius:40px ;
+    font-size: 20px;
+    padding: 10px;
+}
+.headding{
+    margin-left: 10px;
+    font-size: 50px;
+font-weight: 500;
+}
+button{
+    max-width: 100px;
+    outline: none;
+    border: none;
+    color: white;
+}
+.warning{
+    background-color: #fbc531;
+    padding: 10px;
+      outline: none;
+    border: none;
+    font-size: 20px;
+    width: 200px;
+    transition: all 200ms ease-in-out;
+       text-shadow: 0.5px 0.5px 5px gray;
+       border-radius: 10px;
+}
+.warning:hover{
+    background-color: #e84118;
+     transform: scale(1.05)
+
+}
+.main_pro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:450px;
+    margin-top: 20px;
+}
+.create_account{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+a{
+    text-decoration: none;
+}
+.main_head{
+text-align: center;
+margin-top: 20px;
+font-size: 50px;
+
+}
+.main_head:hover{
+
+}
