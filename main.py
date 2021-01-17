@@ -333,7 +333,7 @@ def indexx(name):
             mysql.connection.commit()
 
         elif post_start_point == "Kolkata" and post_end_point == "Delhi" or post_start_point == "Delhi" and post_end_point == "Kolkata":
-            print("sex")
+
             cur = mysql.connection.cursor()
             sql = "SELECT * FROM enq WHERE name='DEL<-->KOL(EXPRESS)'"
             cur.execute(sql)
@@ -351,7 +351,6 @@ def indexx(name):
 
         elif post_start_point == "Mumbai" and post_end_point == "Delhi" or post_start_point == "Delhi" and post_end_point == "Mumbai":
 
-            print("sex")
             cur = mysql.connection.cursor()
             sql = "SELECT * FROM enq WHERE name='MUM<-->DEL(EXPRESS)'"
             cur.execute(sql)
@@ -367,7 +366,7 @@ def indexx(name):
             cur.execute(sql)
             mysql.connection.commit()
         elif post_start_point == "Mumbai" and post_end_point == "Banglore" or post_start_point == "Banglore" and post_end_point == "Mumbai":
-            print("sex")
+
             cur = mysql.connection.cursor()
             sql = "SELECT * FROM enq WHERE name='BLR<-->MUM(EXPRESS)'"
             cur.execute(sql)
@@ -383,7 +382,7 @@ def indexx(name):
             cur.execute(sql)
             mysql.connection.commit()
         elif post_start_point == "Mumbai" and post_end_point == "Kolkata" or post_start_point == "Kolkata" and post_end_point == "Mumbai":
-            print("sex")
+
             cur = mysql.connection.cursor()
             sql = "SELECT * FROM enq WHERE name='MUM<-->KOL(EXPRESS)'"
             cur.execute(sql)
@@ -399,7 +398,7 @@ def indexx(name):
             cur.execute(sql)
             mysql.connection.commit()
         elif post_start_point == "Banglore" and post_end_point == "Kolkata" or post_start_point == "Kolkata" and post_end_point == "Banglore":
-            print("sex")
+
             cur = mysql.connection.cursor()
             sql = "SELECT * FROM enq WHERE name='BLR<-->KOL(EXPRESS)'"
             cur.execute(sql)
