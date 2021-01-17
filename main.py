@@ -47,7 +47,7 @@ def Login():
         data = cur.rowcount
         print(f"the user id is {user_id}")
         # return redirect('/home', values=user_id, name=a[1], phone=a[3])
-        return redirect(url_for('home', name="acar"))
+        return render_template('Main.html')
     return render_template('Signup.html')
 
 
