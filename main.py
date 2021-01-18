@@ -14,17 +14,31 @@ app.config['MYSQL_DB'] = "railway"
 
 today_date = datetime.datetime.now()
 mysql = MySQL(app)
-try:
-    if user_id == "":
-
-        log_sign()
-    if user_id != "":
-        main()
-except:
-    print("validating")
+phone = 7338003303
 user_id = 1
-phonenumber = ""
-password = ""
+
+
+def generatenew(idnew):
+    sql = "SELECT * FROM book_ticket WHERE id={}".format(idnew)
+    cur = mysql.connection.cursor()
+    cur.execute(sql)
+    a = cur.fetchone()
+    iid = a[0]
+    name = a[1]
+    age = a[2]
+    st_p = a[3]
+    ed_p = a[4]
+    x = str(iid)
+    j_d = a[8]
+    b_d = a[7]
+    try:
+        file = open("Rail_Ticket_"+x+".txt", "w")
+        file.write("<-----------********----------->\nNOTE:-->Don't try to make a fake ticket. Tc will get to know if the ticket is fake or real.\nTicket id : "+x +
+                   "\nName : "+name+"\nAge : "+str(age)+"\nFrom : "+st_p+"\nTo :"+ed_p+"\nJourney Date :"+j_d+"\nBooking Date :"+b_d+"\n<--------------************------------->")
+        file.close()
+        print(i, " ticket generated as Rail_Ticket_"+x+".txt\n")
+    except:
+        print("done")
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -43,16 +57,29 @@ def Login():
         cur = mysql.connection.cursor()
         cur.execute(sql)
         a = cur.fetchone()
+        # global user_id
         user_id = a[0]
+        nameone = a[1]
+        # print(f"the user id is {user_id}")
         data = cur.rowcount
-        print(f"the user id is {user_id}")
-        # return redirect('/home', values=user_id, name=a[1], phone=a[3])
-        return render_template('Main.html')
-    return render_template('Signup.html')
+        # print(f"the user id is {user_id}")
+        return render_template('Main.html', value=user_id, name=phone, nameone=nameone)
+    else:
+        # print(f"the user id is {user_id}")
+        # redirect(url_for('home', date=date))
+        # return render_template('Main.html')
+        return render_template('Signup.html')
 
 
-@app.route('/Book', methods=['GET', 'POST'])
-def Bookk():
+# print(f"the user id is {user_id}")
+
+
+# await print(f"the user id is {user_id}")
+
+
+@app.route('/Book/<int:name>/<int:idon>', methods=['GET', 'POST'])
+def Bookk(name, idon):
+    print(name)
     if request.method == 'POST':
 
         post_title = request.form['booking_val']
@@ -62,9 +89,9 @@ def Bookk():
 
         # returne(post_title)
 
-        return render_template('booking.html', value=int(post_title)), ticket
+        return render_template('booking.html', value=int(post_title), idone=idon, nameone=name), ticket
     else:
-        return render_template('ticket.html')
+        return render_template('ticket.html', value=name, valueone=idon)
 
 
 @app.route('/index', methods=['GET', 'POST'])
@@ -146,13 +173,13 @@ def cancel(idd1, ticketid1):
         # main()
 
 
-def book(name, age, srt_point, end_point, number, date, month, j_date):
+def book(name, age, srt_point, end_point, number, date, month, j_date, nameone, idon):
 
     today_date = datetime.datetime.now()
     phone = 7338003303
     cur = mysql.connection.cursor()
     sql = "INSERT INTO book_ticket (name,age,starting_point,end_point,phone,user_id,book_date,j_date) VALUES ('{}',{},'{}','{}',{},{},'{}','{}')".format(
-        name, age, srt_point, end_point, phone, user_id, today_date, j_date)
+        name, age, srt_point, end_point, nameone, idon, today_date, j_date)
     cur.execute(sql)
     mysql.connection.commit()
     # print(i, " *** Ticket has been REGISTERED THANK YOU VIST AGAIN ***\n")
@@ -160,8 +187,8 @@ def book(name, age, srt_point, end_point, number, date, month, j_date):
     print("error")
 
 
-@app.route("/Cancel", methods=['GET', 'POST'])
-def Cancel():
+@app.route("/Cancel/<int:name>/<int:idon>", methods=['GET', 'POST'])
+def Cancel(name, idon):
     if request.method == 'POST':
         # Fetch form data
         userDetails = request.form
@@ -171,22 +198,22 @@ def Cancel():
         cur = mysql.connection.cursor()
         sql = "SELECT * FROM book_ticket WHERE phone={} and user_id={}".format(
             # phone, user_id)
-              phone, user_id)
+              name, idon)
 
         cur.execute(sql)
         a = cur.fetchall()
 
-        return render_template('cancel.html', res=a)
+        return render_template('cancel.html', res=a, name=int(name), idone=int(idon))
     else:
         cur = mysql.connection.cursor()
         sql = "SELECT * FROM book_ticket WHERE phone={} and user_id={}".format(
             # phone, user_id)
-              phone, user_id)
+              name, idon)
 
         cur.execute(sql)
         a = cur.fetchall()
 
-        return render_template('cancel.html', res=a)
+        return render_template('cancel.html', res=a, name=int(name), idone=int(idon))
 
 
 def password(password):
@@ -207,26 +234,35 @@ def password(password):
         print("password less than 8 is not allowed.\n---------------")
 
 
-@app.route("/Profile", methods=['GET', 'POST'])
-def profile():
+@app.route("/Profile/<int:name>/<int:idon>", methods=['GET', 'POST'])
+def profile(name, idon):
+    cur = mysql.connection.cursor()
+    sql = "SELECT * FROM user_info WHERE phone={} and id='{}'".format(
+        name, idon)
+    cur.execute(sql)
+    mysql.connection.commit()
+    a = cur.fetchone()
+    print(a[1])
+    details = a[1]
+
     if request.method == 'POST':
 
         userDetails = request.form
         number = userDetails['password_val']
         password(number)
 
-        return render_template('profile.html')
+        return render_template('info.html')
     else:
-        return render_template('profile.html')
+        return render_template('info.html',  name=details, phone=a[3])
 
 
-@app.route("/view")
-def view():
+@app.route("/view/<int:name>/<int:idon>")
+def view(name, idon):
 
     cur = mysql.connection.cursor()
     sql = "SELECT * FROM book_ticket WHERE phone={} and user_id={}".format(
         # phone, user_id)
-        phone, user_id)
+        name, idon)
 
     cur.execute(sql)
     a = cur.fetchall()
@@ -234,10 +270,45 @@ def view():
     return render_template('view.html', res=list(a))
 
 
-@app.route("/Admin")
+@app.route("/Admin/")
 def Admin():
 
-    return render_template('enquiry.html')
+    return render_template('admin.html')
+
+
+@app.route("/generate/<int:name>/<int:idon>", methods=['GET', 'POST'])
+def generate(name, idon):
+
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+        sql = "SELECT * FROM book_ticket WHERE phone={} and user_id={}".format(
+            # phone, user_id)
+            name, idon)
+
+        cur.execute(sql)
+        a = cur.fetchall()
+
+        userDetails = request.form
+        number = userDetails['idnew']
+
+        generatenew(int(number))
+        return render_template('generate.html', res=a)
+    else:
+        cur = mysql.connection.cursor()
+        sql = "SELECT * FROM book_ticket WHERE phone={} and user_id={}".format(
+            # phone, user_id)
+            name, idon)
+
+        cur.execute(sql)
+        a = cur.fetchall()
+
+        return render_template('generate.html', res=a,)
+
+
+@app.route("/Cred")
+def Cred():
+
+    return render_template('profile.html')
 
 
 @app.route("/Enquiry")
@@ -266,8 +337,8 @@ def issue(number):
         print("Rendering to submit\n")
 
 
-@app.route("/Report", methods=['GET', 'POST'])
-def report():
+@app.route("/Report/<int:name>/<int:idon>", methods=['GET', 'POST'])
+def report(name, idon):
     if request.method == 'POST':
         userDetails = request.form
         number = userDetails['report']
@@ -276,7 +347,7 @@ def report():
         cur = mysql.connection.cursor()
         sql = "SELECT * FROM report WHERE phone={}".format(
             # phone, user_id)
-            phone)
+            name)
 
         cur.execute(sql)
         a = cur.fetchall()
@@ -287,7 +358,7 @@ def report():
         cur = mysql.connection.cursor()
         sql = "SELECT * FROM report WHERE phone={}".format(
             # phone, user_id)
-            phone)
+            name)
         cur.execute(sql)
         a = cur.fetchall()
 
@@ -304,8 +375,11 @@ ticket = None
 print("the ticket is ", ticket)
 
 
-@app.route("/home/<name>", methods=['GET', 'POST'])
-def indexx(name):
+@app.route('/home/<int:idon>/<int:nameone>', methods=['GET', 'POST'])
+def indexx(idon, nameone):
+    print(f"the user id is {idon}")
+
+    name = request.args.get('name', None)
     print(name)
     if request.method == 'POST':
         post_date = request.form['date_val']
@@ -315,6 +389,13 @@ def indexx(name):
         # select = request.form.get('comp_select')
         post_end_point = request.form.get('ending_point')
         j_date = post_date + "-" + post_month
+        for i in range(0, int(Booked)):
+
+            post_name = request.form[f'name_{i}']
+
+            post_age = request.form[f'age_{i}']
+            book(post_name, post_age, post_start_point,
+                 post_end_point, nameone, idon, today_date, j_date, nameone, idon)
         if post_start_point == "Banglore" and post_end_point == "Delhi" or post_start_point == "Delhi" and post_end_point == "Banglore":
 
             cur = mysql.connection.cursor()
@@ -419,13 +500,6 @@ def indexx(name):
             print(post_start_point)
             print("not accessable")
 
-        for i in range(0, int(Booked)):
-
-            post_name = request.form[f'name_{i}']
-
-            post_age = request.form[f'age_{i}']
-            book(post_name, post_age, post_start_point,
-                 post_end_point, phone, user_id, today_date, j_date)
         # print(post_end_point)
         # print(post_start_point)
 
@@ -448,16 +522,56 @@ def indexx(name):
         # db.session.commit()
         return render_template('main.html')
     else:
-        return render_template('main.html', name=name_pro)
+        return render_template('main.html')
 
 
-@app.route('/users')
+try:
+    if user_id == "":
+        print("hello")
+
+    if user_id != "":
+        print("omsairam")
+except:
+    print("validating")
+
+
+@app.route('/Create', methods=['GET', 'POST'])
 def users():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT * FROM users")
-    if resultValue > 0:
-        userDetails = cur.fetchall()
-        return render_template('users.html', userDetails=userDetails)
+    global phonenumber
+    if request.method == 'POST':
+
+        userDetails = request.form
+        phone = userDetails['phone']
+        username = userDetails['username']
+        password = userDetails['password']
+        print(password, phone, username)
+        # phonenumber = phone
+        p = "@@".join(password)
+        # sql = "SELECT * FROM user_info WHERE phone={} and pass='{}'".format(
+        #     int(phone), p)
+        cur = mysql.connection.cursor()
+        sql = "INSERT INTO user_info (username,pass,phone) VALUES ('{}','{}','{}')".format(
+            username, p, phone)
+        cur.execute(sql)
+        mysql.connection.commit()
+        cur.close()
+        print("Account Created succesfully\n---------------")
+
+        #
+        # cur.execute(sql)
+        # a = cur.fetchone()
+        # # global user_id
+        # user_id = a[0]
+        # nameone = a[1]
+        # print(f"the user id is {user_id}")
+        # data = cur.rowcount
+        # print(f"the user id is {user_id}")
+        return render_template('Signup.html')
+    else:
+        # print(f"the user id is {user_id}")
+        # redirect(url_for('home', date=date))
+        # return render_template('Main.html')
+        return render_template('create.html')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,10 @@
+<-----------********----------->
+NOTE:-->Don't try to make a fake ticket. Tc will get to know if the ticket is fake or real.
+Ticket id : 58
+Name : ng
+Age : 12
+From : Banglore
+To :Banglore
+Journey Date :1-1
+Booking Date :2021-01-18 14:12:45.670522
+<--------------************------------->

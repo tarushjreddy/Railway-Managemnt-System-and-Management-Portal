@@ -6,40 +6,139 @@
     <title>Document</title>
     <link rel="stylesheet" href="../static/Main.css" />
   </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+    .nav_bar {
+      width: 100vw;
+      height: 50px;
+
+      background-color: #011b35;
+      color: white;
+      font-size: 20px;
+      text-shadow: 0.5px 0.5px 5px black;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 10px;
+
+      font-weight: 500;
+      box-shadow: 0.5px 0.5px 5px gray;
+    }
+    .name {
+      margin-right: 20px;
+    }
+    .name_prp {
+      display: none;
+    }
+    body {
+      background-color: white;
+      margin: 0px;
+    }
+    .boxes {
+      min-height: 290px;
+      min-width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0.5px 0.5px 5px gray;
+      color: red;
+
+      margin: 10px;
+      border-radius: 20px;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      font-size: 30px;
+      font-weight: 800;
+    }
+    .container {
+      display: flex;
+      margin-top: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #one {
+      background-color: #8e44ad !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #two {
+      background-color: #3498db !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #three {
+      background-color: #2ecc71 !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #four {
+      background-color: #95a5a6 !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #five {
+      background-color: #34495e !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+
+    #six {
+      background-color: #c0392b !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #seven {
+      background-color: #f1c40f !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #eight {
+      background-color: #badc58 !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    #nine {
+      background-color: #fd79a8 !important;
+      text-shadow: 0.5px 0.5px 10px gray;
+    }
+    .boxes:hover {
+      transform: scale(1.02);
+      transition: all 500ms ease-in-out;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
   <body>
     <div class="nav_bar">
       Railway Ticket Reservation System Portal 🚞
-      <p class="name">Welcome {{name}}</p>
+      <p class="name">Welcome {{nameone}}</p>
       <!-- <p class="name_prp">{{phone}}</p> -->
     </div>
 
     <div class="container">
-      <a href="/Book">
+      <a href="/Book/{{name}}/{{value}}">
         <div class="boxes" id="one">Ticket Booking</div>
       </a>
-      <a href="/Report">
+      <a href="/Profile/{{name}}/{{value}}">
         <div class="boxes" id="eight">View Profile</div>
       </a>
-      <a href="/Cancel">
+      <a href="/Cancel/{{name}}/{{value}}">
         <div class="boxes" id="two">Ticket Cancellation</div>
       </a>
-      <a href="/view">
+      <a href="/view/{{name}}/{{value}}">
         <div class="boxes" id="five">View Tickets</div>
       </a>
-      <a href="/Report">
+      <a href="/Report/{{name}}/{{value}}">
         <div class="boxes" id="six">Report Issues</div>
       </a>
       <a href="/Enquiry">
         <div class="boxes" id="four">Rail Enquiry</div>
       </a>
 
-      <a href="/Profile">
+      <a href="/Cred">
         <div class="boxes" id="three">Profile Updation</div>
       </a>
-      <a href="/Admin">
+      <a href="/admin">
         <div class="boxes" id="seven">Admin Section</div>
       </a>
-      <a href="/Admin">
+      <a href="/generate/{{name}}/{{value}}">
         <div class="boxes" id="nine">Generate Ticket</div>
       </a>
     </div>
